@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список заказов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Список заказов</h1>
+
+        <!-- Форма поиска -->
+        <form method="GET" class="mb-4">
+            {% csrf_token %}
+            <div class="row">
+                <!-- Кнопка поиска в отдельной строке -->
+                <div class="col-12 mb-3">
+                    <button type="submit" class="btn btn-primary w-100">Поиск</button>
+                </div>
+
+                <!-- Поля для поиска -->
+                <div class="col-md-6 mb-3">
+                    <label for="table_number" class="form-label">Номер стола</label>
+                    {{ form.table_number }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="status" class="form-label">Статус заказа</label>
+                    {{ form.status }}
+                </div>
+            </div>
+        </form>
+
+        <!-- Таблица заказов -->
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>ID Заказа</th>
+                    <th>Стол</th>
+                    <th>Список блюд</th>
+                    <th>Стоимость (₽)</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr class="{% if order.status == 'completed' %}table-success{% endif %}">
+                    <td class="text-center">{{ order.id }}</td>
+                    <td class="text-center">{{ order.table_number }}</td>
+                    <td>
+                        <ul class="list-unstyled mb-0">
+                            {% for item in order.items %}
+                                <li>🍽️ {{ item.name }} - {{ item.price }} ₽</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="text-center fw-bold">{{ order.total_price }}</td>
+                    <td class="text-center">
+                        <span class="badge
+                            {% if order.status == 'waiting' %} bg-warning
+                            {% elif order.status == 'ready' %} bg-success
+                            {% elif order.status == 'paid' %} bg-info
+                            {% endif %}">
+                            {{ order.get_status_display }}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'update_status' order.id %}" class="btn btn-sm btn-outline-primary">✏ Изменить статус</a>
+                        <a href="{% url 'delete_order' order.id %}" class="btn btn-sm btn-outline-danger">🗑 Удалить</a>
+                        <a href="{% url 'edit_order' order.id %}" class="btn btn-sm btn-outline-secondary">✎ Редактировать заказ</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Нет активных заказов</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'create_order' %}" class="btn btn-success">➕ Создать новый заказ</a>
+            <a href="{% url 'calculate_revenue' %}" class="btn btn-info ms-2">💰 Просмотр выручки</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

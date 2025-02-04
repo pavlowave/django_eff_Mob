@@ -1,0 +1,48 @@
+<!-- search_orders.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск заказов</title>
+</head>
+<body>
+    <h1>Поиск заказов</h1>
+
+    <form method="GET">
+        <input type="text" name="query" placeholder="Введите номер стола или статус" value="{{ request.GET.query }}">
+        <button type="submit">Поиск</button>
+    </form>
+
+    <h2>Результаты поиска:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Стол</th>
+                <th>Список блюд</th>
+                <th>Стоимость</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.table_number }}</td>
+                <td>{{ order.items|length }} блюда</td>
+                <td>{{ order.total_price }}</td>
+                <td>{{ order.get_status_display }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Нет заказов, соответствующих запросу.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{% url 'order_list' %}">Вернуться к списку заказов</a>
+</body>
+</html>
