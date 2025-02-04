@@ -14,7 +14,7 @@
 1. Клонирование репозитория:
 
 ```
-git clone https://github.com/pavlowave/Docker-Django-Postgres
+git clone https://github.com/pavlowave/django_eff_Mob
 cd Docker-Django-Postgres
 ```
 
