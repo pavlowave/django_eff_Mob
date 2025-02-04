@@ -9,13 +9,15 @@
 [![Docker](https://img.shields.io/badge/Docker-%230db7ed?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 </div>
 
+Выполнено в рамках [тестового задания]([https://app.affine.pro/workspace/f6dfe706-59c0-41e5-898b-9d6a25d84efe/axys06NdTgU_NMAga6JC9?mode=page](https://app.affine.pro/workspace/250b4b65-457d-47fa-97cc-def98b124735/it0qZqZ0R57zFfJa7xVC6?mode=page))
+
 ## Установка и запуск:
 
 1. Клонирование репозитория:
 
 ```
 git clone https://github.com/pavlowave/django_eff_Mob
-cd Docker-Django-Postgres
+cd django_eff_Mob
 ```
 
 2. Создание .env файла:
@@ -39,7 +41,7 @@ docker-compose up --build
 ```
 docker-compose exec web-app python manage.py migrate
 ```
-5. Доступ к приложению Приложение будет доступно по адресу: http://127.0.0.1:8000/
+5. Приложение будет доступно по адресу: [http://127.0.0.1:8000/](http://127.0.0.1:8000/api/orders/)
 
 ## Структура проекта
 
