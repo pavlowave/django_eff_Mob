@@ -9,7 +9,7 @@
 [![Docker](https://img.shields.io/badge/Docker-%230db7ed?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 </div>
 
-Выполнено в рамках [тестового задания]([https://app.affine.pro/workspace/f6dfe706-59c0-41e5-898b-9d6a25d84efe/axys06NdTgU_NMAga6JC9?mode=page](https://app.affine.pro/workspace/250b4b65-457d-47fa-97cc-def98b124735/it0qZqZ0R57zFfJa7xVC6?mode=page))
+Выполнено в рамках [тестового задания](https://app.affine.pro/workspace/250b4b65-457d-47fa-97cc-def98b124735/it0qZqZ0R57zFfJa7xVC6?mode=page))
 
 ## Установка и запуск:
 
